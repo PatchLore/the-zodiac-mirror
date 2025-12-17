@@ -458,8 +458,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
           </motion.div>
         )}
 
-        {/* CTA: Create Your Own Goddess Image */}
-        {/* TODO: Future extension: optional short looping MP4 "Living Portrait" (subtle aura motion, 5–8s loop, delivered privately) */}
+        {/* Personalised Portrait Bundle */}
         <motion.div
           ref={portraitSectionRef}
           initial={{ opacity: 0, y: 20 }}
@@ -469,22 +468,45 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
         >
           <div className="bg-purple-900/20 backdrop-blur-md border border-purple-500/30 rounded-3xl p-6">
             <h2 className="text-xl font-semibold text-purple-200 mb-3 text-center">
-              Personalised Aura Portraits
+              Personalised Portrait — Zodiac Mirror
             </h2>
             <p className="text-purple-300 text-sm text-center mb-3">
-              If you’d like a custom portrait inspired by your reflection, you can request a personalised aura image.
+              If you'd like a custom portrait inspired by your reflection, you can request a personalised Zodiac Mirror portrait.
             </p>
-            <p className="text-purple-300 text-sm text-center mb-3">
+            <p className="text-purple-300 text-sm text-center mb-4">
               This is a considered, hand-crafted process — not an instant filter.
             </p>
+            
+            {/* Includes section */}
+            <div className="mb-5 pb-5 border-b border-purple-500/20">
+              <p className="text-purple-200 text-xs font-semibold text-center mb-3">
+                Includes:
+              </p>
+              <ul className="space-y-2 text-purple-300/90 text-xs text-left">
+                <li className="flex items-start">
+                  <span className="text-pink-300 mr-2">•</span>
+                  <span>A personalised portrait image</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-pink-300 mr-2">•</span>
+                  <span>A short living portrait where the aura subtly moves</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-pink-300 mr-2">•</span>
+                  <span>A curated soundtrack of 10 tracks inspired by your reflection</span>
+                </li>
+              </ul>
+            </div>
+            
             <p className="text-purple-400/70 text-xs text-center mb-5">
-              You'll be guided with a few gentle questions by email.
+              Created individually and delivered privately by email.
             </p>
+            
             <a
               href="mailto:zodiacaura@mail.com?subject=Personalised Aura Portrait Request&body=Hi,%0D%0A%0D%0AI'd like to request a personalised Zodiac Mirror portrait.%0D%0A%0D%0AReflection / goddess (if known):%0D%0A(If you're not sure, that's okay.)%0D%0A%0D%0AWhich quality should the portrait lean toward?%0D%0ACalm / Power / Mystery / Balance / Not sure%0D%0A%0D%0AWhen you imagine this portrait as a mirror, what should it reflect back to you?%0D%0A(e.g. calm, strength, softness, clarity, becoming)%0D%0A%0D%0AIs there anything you'd prefer to avoid?%0D%0A(e.g. intense expressions, dark tones, mythic elements)%0D%0A%0D%0AAny additional requests or details you'd like me to consider?%0D%0A(Optional — only if it feels important.)%0D%0A%0D%0AI've attached my photo.%0D%0A%0D%0AThank you."
               className="block w-full py-3 px-6 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full text-white font-semibold shadow-lg shadow-pink-500/30 text-center focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
             >
-              Request a Personalised Portrait
+              Create My Portrait
             </a>
             <p className="text-purple-400/70 text-xs text-center mt-3">
               By requesting a portrait, you agree to the{' '}
@@ -497,9 +519,6 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
             <div className="mt-6 pt-6 border-t border-purple-500/20">
               <p className="text-purple-300 text-sm text-center mb-2">
                 Pay for a personalised portrait.
-              </p>
-              <p className="text-purple-300 text-xs text-center mb-4">
-                Created individually and delivered privately.
               </p>
               <div
                 id="paypal-container-DRQT4AJREA3WN"
@@ -521,7 +540,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
                   </li>
                   <li className="flex items-start">
                     <span className="text-pink-300 mr-2">•</span>
-                    <span>Your portrait is created individually</span>
+                    <span>Your portrait, living portrait, and soundtrack are created individually</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-pink-300 mr-2">•</span>
@@ -529,7 +548,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
                   </li>
                   <li className="flex items-start">
                     <span className="text-pink-300 mr-2">•</span>
-                    <span>Delivered privately by email</span>
+                    <span>All three elements delivered privately by email</span>
                   </li>
                 </ul>
               </div>
