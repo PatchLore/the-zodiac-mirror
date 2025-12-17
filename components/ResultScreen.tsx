@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ZodiacGoddess } from '@/types';
 import { goddessProfiles } from '@/data/goddessProfiles';
 import html2canvas from 'html2canvas';
@@ -457,6 +458,13 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
             >
               Request a Personalised Portrait
             </a>
+            <p className="text-purple-400/70 text-xs text-center mt-3">
+              By requesting a portrait, you agree to the{' '}
+              <Link href="/portrait-terms" className="text-pink-300 hover:text-pink-200 underline">
+                Personalised Portrait Terms
+              </Link>
+              .
+            </p>
           </div>
         </motion.div>
 
