@@ -459,6 +459,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
         )}
 
         {/* CTA: Create Your Own Goddess Image */}
+        {/* TODO: Future extension: optional short looping MP4 "Living Portrait" (subtle aura motion, 5–8s loop, delivered privately) */}
         <motion.div
           ref={portraitSectionRef}
           initial={{ opacity: 0, y: 20 }}
@@ -480,7 +481,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
               You'll be guided with a few gentle questions by email.
             </p>
             <a
-              href="mailto:zodiacaura@mail.com?subject=Personalised Aura Portrait Request&body=Hi,%0D%0A%0D%0AI'd like to request a personalised Zodiac Mirror portrait.%0D%0A%0D%0AReflection / goddess (if known):%0D%0A(If you're not sure, that's okay.)%0D%0A%0D%0AWhich quality should the portrait lean toward?%0D%0ACalm / Power / Mystery / Balance / Not sure%0D%0A%0D%0AWhen I see this portrait, I'd like it to feel:%0D%0A%0D%0AAnything I'd prefer to avoid:%0D%0A%0D%0AAny additional requests or details you'd like me to consider?%0D%0A(Optional — only if it feels important.)%0D%0A%0D%0AI've attached my photo.%0D%0A%0D%0AThank you."
+              href="mailto:zodiacaura@mail.com?subject=Personalised Aura Portrait Request&body=Hi,%0D%0A%0D%0AI'd like to request a personalised Zodiac Mirror portrait.%0D%0A%0D%0AReflection / goddess (if known):%0D%0A(If you're not sure, that's okay.)%0D%0A%0D%0AWhich quality should the portrait lean toward?%0D%0ACalm / Power / Mystery / Balance / Not sure%0D%0A%0D%0AWhen you imagine this portrait as a mirror, what should it reflect back to you?%0D%0A(e.g. calm, strength, softness, clarity, becoming)%0D%0A%0D%0AIs there anything you'd prefer to avoid?%0D%0A(e.g. intense expressions, dark tones, mythic elements)%0D%0A%0D%0AAny additional requests or details you'd like me to consider?%0D%0A(Optional — only if it feels important.)%0D%0A%0D%0AI've attached my photo.%0D%0A%0D%0AThank you."
               className="block w-full py-3 px-6 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full text-white font-semibold shadow-lg shadow-pink-500/30 text-center focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
             >
               Request a Personalised Portrait
