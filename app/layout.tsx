@@ -3,8 +3,9 @@ import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Zodiac Aura Mirror',
-  description: 'Discover your Zodiac Goddess identity through a mystical quiz',
+  title: 'The Zodiac Mirror — Reflecting the Archetypes Within',
+  description:
+    'A calm, reflective experience to explore zodiac archetypes through a short quiz or your birth details.',
 };
 
 export const viewport: Viewport = {

@@ -60,17 +60,17 @@ export default function StartScreen({ onStartQuiz, onStartBirthChart }: StartScr
           ✨
         </motion.div>
         <h1 className="text-5xl font-bold mb-4 gradient-text">
-          Zodiac Aura
+          The Zodiac Mirror
         </h1>
-        <h2 className="text-3xl font-light text-purple-300 mb-2">
-          Mirror
+        <h2 className="text-xl font-light text-purple-300 mb-2 tracking-wide">
+          Reflecting the Archetypes Within
         </h2>
         <motion.div
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="text-purple-400 text-sm mt-4"
         >
-          Discover Your Divine Archetype
+          A calm space to explore your archetypal resonance
         </motion.div>
       </motion.div>
 
