@@ -452,7 +452,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
               This is a considered, hand-crafted process — not an instant filter.
             </p>
             <a
-              href="mailto:youremail@domain.com?subject=Personalised%20Aura%20Portrait%20Request&body=Hi,%0D%0A%0D%0AI'd%20like%20to%20request%20a%20personalised%20aura%20portrait.%0D%0A%0D%0AName:%0D%0AZodiac%20Sign:%0D%0AAny%20notes:%0D%0A%0D%0AThanks"
+              href="mailto:zodiacaura@mail.com?subject=Personalised Aura Portrait Request&body=Hi,%0D%0A%0D%0AI'd like to request a personalised aura portrait.%0D%0A%0D%0AName:%0D%0AZodiac Sign:%0D%0AAny notes:%0D%0A%0D%0AThanks"
               className="block w-full py-3 px-6 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full text-white font-semibold shadow-lg shadow-pink-500/30 text-center focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
             >
               Request a Personalised Portrait
