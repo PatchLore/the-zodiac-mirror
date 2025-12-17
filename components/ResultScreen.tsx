@@ -90,9 +90,36 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
         await fonts.ready;
       }
 
+      // Give the browser a moment to layout/paint the off-screen canvas
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      // Ensure the portrait image is loaded before capture
+      const img = wallpaperRef.current.querySelector('img');
+      if (img) {
+        // `complete` covers cached images; `decode()` helps ensure pixels are ready
+        if (!img.complete) {
+          await new Promise<void>((resolve) => {
+            img.addEventListener('load', () => resolve(), { once: true });
+            img.addEventListener('error', () => resolve(), { once: true });
+          });
+        }
+        // decode() is not supported everywhere; best-effort
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const decode = (img as any).decode;
+        if (typeof decode === 'function') {
+          try {
+            await decode.call(img);
+          } catch {
+            // ignore
+          }
+        }
+      }
+
       const canvas = await html2canvas(wallpaperRef.current, {
         backgroundColor: null,
         scale: 2, // 1080x1920 -> 2160x3840 export
+        width: 1080,
+        height: 1920,
         useCORS: true,
       });
       const url = canvas.toDataURL('image/png');
@@ -317,7 +344,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
                     disabled={isExporting}
                     className="flex-1 py-3 px-4 bg-purple-900/25 border border-purple-500/30 rounded-full text-purple-100 text-sm font-medium hover:bg-purple-900/35 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
                   >
-                    Copy Power Phrase
+                    Copy Reflection
                   </button>
                   <button
                     type="button"
@@ -330,7 +357,11 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
                 </div>
 
                 <div className="min-h-[16px] text-center text-xs text-purple-300">
-                  {isExporting ? 'Creating a wallpaper image…' : copiedPhrase ? 'Copied' : ''}
+                  {isExporting
+                    ? 'Creating a wallpaper image…'
+                    : copiedPhrase
+                      ? 'Copied'
+                      : 'A line to keep from this reflection.'}
                 </div>
               </div>
             </div>
@@ -449,7 +480,14 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
       {profile && (
         <div
           ref={wallpaperRef}
-          className="fixed left-[-10000px] top-0 opacity-0 pointer-events-none"
+          style={{
+            position: 'fixed',
+            top: '-9999px',
+            left: '-9999px',
+            width: '1080px',
+            height: '1920px',
+            pointerEvents: 'none',
+          }}
           aria-hidden="true"
         >
           <WallpaperCanvas

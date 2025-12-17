@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Analytics } from '@vercel/analytics/next';
+import Link from 'next/link';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -23,8 +24,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen w-full overflow-x-hidden bg-mystic-dark">
-        <div className="mx-auto max-w-[450px] min-h-screen relative">
-          {children}
+        <div className="mx-auto max-w-[450px] min-h-screen relative flex flex-col">
+          <div className="flex-1">{children}</div>
+          <footer className="px-6 pb-8 pt-6 text-xs text-purple-300/80">
+            <nav className="flex items-center justify-center gap-5">
+              <Link href="/about" className="hover:text-purple-100 transition-colors">
+                About
+              </Link>
+              <span className="text-purple-500/40" aria-hidden="true">
+                •
+              </span>
+              <Link href="/faq" className="hover:text-purple-100 transition-colors">
+                FAQ
+              </Link>
+            </nav>
+          </footer>
         </div>
         <Analytics />
       </body>

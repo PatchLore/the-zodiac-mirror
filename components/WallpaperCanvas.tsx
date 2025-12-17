@@ -86,6 +86,7 @@ export default function WallpaperCanvas({ imageSrc, title, line, element }: Wall
         >
           <img
             src={imageSrc}
+            crossOrigin="anonymous"
             alt={title || 'Zodiac portrait'}
             style={{
               width: '100%',

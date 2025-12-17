@@ -12,6 +12,7 @@ interface ShareSheetProps {
 
 export default function ShareSheet({ open, onClose, onDownload, caption }: ShareSheetProps) {
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const handleCopyCaption = async () => {
     try {
@@ -20,6 +21,16 @@ export default function ShareSheet({ open, onClose, onDownload, caption }: Share
       window.setTimeout(() => setCopied(false), 1500);
     } catch (e) {
       console.error('Failed to copy caption:', e);
+    }
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setLinkCopied(true);
+      window.setTimeout(() => setLinkCopied(false), 1500);
+    } catch (e) {
+      console.error('Failed to copy link:', e);
     }
   };
 
@@ -68,8 +79,16 @@ export default function ShareSheet({ open, onClose, onDownload, caption }: Share
                 Copy Caption
               </button>
 
+              <button
+                type="button"
+                onClick={handleCopyLink}
+                className="w-full py-3 px-6 bg-purple-900/25 border border-purple-500/30 rounded-full text-purple-100 text-sm font-medium hover:bg-purple-900/35 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
+              >
+                Copy Link
+              </button>
+
               <div className="min-h-[16px] text-center text-xs text-purple-300">
-                {copied ? 'Copied' : ''}
+                {linkCopied ? 'Link copied' : copied ? 'Copied' : ''}
               </div>
 
               <button
