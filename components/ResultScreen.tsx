@@ -31,6 +31,8 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
   const [copiedPhrase, setCopiedPhrase] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const wallpaperRef = useRef<HTMLDivElement>(null);
+  const portraitSectionRef = useRef<HTMLDivElement>(null);
+  const resultCardRef = useRef<HTMLDivElement>(null);
 
   const handleFeedback = (feedback: string) => {
     // In production, send feedback to your API
@@ -90,6 +92,14 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
       hostedButtonId: 'DRQT4AJREA3WN',
     }).render('#paypal-container-DRQT4AJREA3WN');
   }, []);
+
+  const handleCreatePortrait = () => {
+    portraitSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleSitWithReflection = () => {
+    resultCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const handleDownloadWallpaper = async () => {
     if (!wallpaperRef.current || !profile) return;
@@ -182,6 +192,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             className="w-full max-w-md"
+            ref={resultCardRef}
           >
             {/* Styled Result Card */}
             <div className="bg-purple-900/20 backdrop-blur-md border border-purple-500/30 rounded-3xl p-8 shadow-2xl shadow-purple-900/50 relative overflow-hidden">
@@ -449,6 +460,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
 
         {/* CTA: Create Your Own Goddess Image */}
         <motion.div
+          ref={portraitSectionRef}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.9 }}
@@ -493,6 +505,33 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
                 className="mt-4"
                 aria-label="PayPal payment for personalised portrait"
               />
+              <div className="mt-6 pt-6 border-t border-purple-500/20">
+                <h3 className="text-purple-200 text-sm font-semibold text-center mb-3">
+                  What happens next
+                </h3>
+                <ul className="space-y-2 text-purple-300/90 text-xs text-left">
+                  <li className="flex items-start">
+                    <span className="text-pink-300 mr-2">•</span>
+                    <span>Send your photo to{' '}
+                      <a href="mailto:zodiacaura@mail.com" className="text-pink-300 hover:text-pink-200 underline">
+                        zodiacaura@mail.com
+                      </a>
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-pink-300 mr-2">•</span>
+                    <span>Your portrait is created individually</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-pink-300 mr-2">•</span>
+                    <span>Inspired by your reflection and responses</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-pink-300 mr-2">•</span>
+                    <span>Delivered privately by email</span>
+                  </li>
+                </ul>
+              </div>
               <p className="text-purple-400/70 text-xs text-center mt-4">
                 By paying, you agree to the{' '}
                 <Link href="/portrait-terms" className="text-pink-300 hover:text-pink-200 underline">
@@ -509,13 +548,19 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.1 }}
-          className="w-full max-w-sm space-y-3 mb-6"
+          className="w-full max-w-md space-y-3 mb-6"
         >
           <motion.button
-            onClick={onReset}
-            className="w-full py-3 px-8 bg-transparent border border-purple-500/30 rounded-full text-purple-200 font-semibold hover:bg-purple-900/20 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
+            onClick={handleCreatePortrait}
+            className="w-full py-3 px-8 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full text-white font-semibold shadow-lg shadow-pink-500/30 hover:shadow-pink-500/40 transition-all focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
           >
-            Discover Again
+            Create My Portrait
+          </motion.button>
+          <motion.button
+            onClick={handleSitWithReflection}
+            className="w-full py-3 px-8 bg-transparent border border-purple-500/20 rounded-full text-purple-300 font-medium hover:bg-purple-900/10 hover:border-purple-500/30 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
+          >
+            Sit With This Reflection
           </motion.button>
         </motion.div>
       </div>
@@ -568,4 +613,5 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
     </div>
   );
 }
+
 
