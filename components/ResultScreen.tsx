@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ZodiacGoddess } from '@/types';
@@ -75,9 +75,21 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
   const fileSafe = (value: string) =>
     value
       .toLowerCase()
-      .replace(/['’"]/g, '')
+      .replace(/[''"]/g, '')
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-+|-+$/g, '');
+
+  // Render PayPal hosted button
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const paypalAny = (window as any).paypal;
+    if (!paypalAny?.HostedButtons) return;
+
+    paypalAny.HostedButtons({
+      hostedButtonId: 'DRQT4AJREA3WN',
+    }).render('#paypal-container-DRQT4AJREA3WN');
+  }, []);
 
   const handleDownloadWallpaper = async () => {
     if (!wallpaperRef.current || !profile) return;
@@ -465,6 +477,27 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
               </Link>
               .
             </p>
+            
+            <div className="mt-6 pt-6 border-t border-purple-500/20">
+              <p className="text-purple-300 text-sm text-center mb-2">
+                Pay for a personalised portrait.
+              </p>
+              <p className="text-purple-300 text-xs text-center mb-4">
+                Created individually and delivered privately.
+              </p>
+              <div
+                id="paypal-container-DRQT4AJREA3WN"
+                className="mt-4"
+                aria-label="PayPal payment for personalised portrait"
+              />
+              <p className="text-purple-400/70 text-xs text-center mt-4">
+                By paying, you agree to the{' '}
+                <Link href="/portrait-terms" className="text-pink-300 hover:text-pink-200 underline">
+                  Personalised Portrait Terms
+                </Link>
+                .
+              </p>
+            </div>
           </div>
         </motion.div>
 

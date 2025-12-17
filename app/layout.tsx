@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Analytics } from '@vercel/analytics/next';
+import Script from 'next/script';
 import Link from 'next/link';
 import './globals.css';
 
@@ -24,6 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen w-full overflow-x-hidden bg-mystic-dark">
+        <Script
+          src="https://www.paypal.com/sdk/js?client-id=BAACTvxzFwrpI1adgSvQ0utasjtm0yTV4qytHGwi5NMz8v9x-1cS9u9sjvC-dWNxWSbqnoOM2l9qKSTM-M&components=hosted-buttons&disable-funding=venmo&currency=GBP"
+          strategy="afterInteractive"
+        />
         <div className="mx-auto max-w-[450px] min-h-screen relative flex flex-col">
           <div className="flex-1">{children}</div>
           <footer className="px-6 pb-8 pt-6 text-xs text-purple-300/80">
