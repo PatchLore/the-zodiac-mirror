@@ -461,11 +461,14 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
             <p className="text-purple-300 text-sm text-center mb-3">
               If you’d like a custom portrait inspired by your reflection, you can request a personalised aura image.
             </p>
-            <p className="text-purple-300 text-sm text-center mb-5">
+            <p className="text-purple-300 text-sm text-center mb-3">
               This is a considered, hand-crafted process — not an instant filter.
             </p>
+            <p className="text-purple-400/70 text-xs text-center mb-5">
+              You'll be guided with a few gentle questions by email.
+            </p>
             <a
-              href="mailto:zodiacaura@mail.com?subject=Personalised Aura Portrait Request&body=Hi,%0D%0A%0D%0AI'd like to request a personalised aura portrait.%0D%0A%0D%0AName:%0D%0AZodiac Sign:%0D%0AAny notes:%0D%0A%0D%0AThanks"
+              href="mailto:zodiacaura@mail.com?subject=Personalised Aura Portrait Request&body=Hi,%0D%0A%0D%0AI'd like to request a personalised Zodiac Mirror portrait.%0D%0A%0D%0AReflection / goddess (if known):%0D%0A(If you're not sure, that's okay.)%0D%0A%0D%0AWhich quality should the portrait lean toward?%0D%0ACalm / Power / Mystery / Balance / Not sure%0D%0A%0D%0AWhen I see this portrait, I'd like it to feel:%0D%0A%0D%0AAnything I'd prefer to avoid:%0D%0A%0D%0AAny additional requests or details you'd like me to consider?%0D%0A(Optional — only if it feels important.)%0D%0A%0D%0AI've attached my photo.%0D%0A%0D%0AThank you."
               className="block w-full py-3 px-6 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full text-white font-semibold shadow-lg shadow-pink-500/30 text-center focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
             >
               Request a Personalised Portrait
