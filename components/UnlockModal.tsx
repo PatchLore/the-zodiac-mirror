@@ -17,7 +17,7 @@ interface UnlockModalProps {
 const API_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
 // Affiliate URL - Replace with your actual affiliate link
-const AFFILIATE_URL = 'https://www.etsy.com/shop/your-shop?ref=zodiac-aura-crystal-pack';
+const AFFILIATE_URL = 'https://www.etsy.com/shop/your-shop?ref=the-zodiac-mirror';
 
 export default function UnlockModal({ onClose, onUnlock, email, setEmail, goddess }: UnlockModalProps) {
   const [step, setStep] = useState<'email' | 'referral'>('email');
@@ -160,10 +160,10 @@ export default function UnlockModal({ onClose, onUnlock, email, setEmail, goddes
                 animate={{ opacity: 1, y: 0 }}
               >
                 <h2 className="text-3xl font-bold mb-4 gradient-text text-center">
-                  Unlock Wallpaper
+                  Save Your Wallpaper
                 </h2>
                 <p className="text-purple-200 text-center mb-6">
-                  Enter your email to unlock your personalized {goddess.name} wallpaper
+                  Share an email to receive your {goddess.name} wallpaper
                 </p>
                 {error && (
                   <div className="mb-4 p-3 bg-red-900/30 border border-red-500/30 rounded-xl text-red-300 text-sm text-center">
@@ -190,13 +190,13 @@ export default function UnlockModal({ onClose, onUnlock, email, setEmail, goddes
                     disabled={isLoading}
                     className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? 'Submitting...' : 'Continue'}
+                    {isLoading ? 'Saving…' : 'Continue'}
                   </motion.button>
                 </form>
 
                 <div className="mt-6 pt-6 border-t border-purple-500/30">
                   <p className="text-purple-300 text-sm text-center mb-4">
-                    Or unlock instantly with:
+                    Or explore a related collection:
                   </p>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -204,7 +204,7 @@ export default function UnlockModal({ onClose, onUnlock, email, setEmail, goddes
                     onClick={handleUnlockWithAffiliate}
                     className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full text-white font-bold"
                   >
-                    Unlock Crystal Pack Bonus ✨
+                    Open crystal collection
                   </motion.button>
                 </div>
               </motion.div>
@@ -216,10 +216,10 @@ export default function UnlockModal({ onClose, onUnlock, email, setEmail, goddes
                 animate={{ opacity: 1, y: 0 }}
               >
                 <h2 className="text-3xl font-bold mb-4 gradient-text text-center">
-                  Bonus Unlock
+                  Add a Referral (Optional)
                 </h2>
                 <p className="text-purple-200 text-center mb-6">
-                  Enter a referral code for bonus content, or skip to unlock now
+                  If you have a referral code, you can include it here
                 </p>
                 {error && (
                   <div className="mb-4 p-3 bg-red-900/30 border border-red-500/30 rounded-xl text-red-300 text-sm text-center">
@@ -245,7 +245,7 @@ export default function UnlockModal({ onClose, onUnlock, email, setEmail, goddes
                     disabled={isLoading}
                     className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? 'Unlocking...' : 'Unlock Now'}
+                    {isLoading ? 'Saving…' : 'Continue'}
                   </motion.button>
                 </form>
               </motion.div>

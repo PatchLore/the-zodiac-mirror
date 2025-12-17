@@ -57,7 +57,7 @@ export default function StartScreen({ onStartQuiz, onStartBirthChart }: StartScr
           }}
           className="text-8xl mb-4 glow-effect"
         >
-          ✨
+          ✦
         </motion.div>
         <h1 className="text-5xl font-bold mb-4 gradient-text">
           The Zodiac Mirror

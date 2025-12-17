@@ -9,14 +9,14 @@ interface ShareButtonsProps {
 }
 
 export default function ShareButtons({ goddess, shareRef }: ShareButtonsProps) {
-  const shareText = `I discovered I'm ${goddess.name} - ${goddess.symbol}\n\n${goddess.powerPhrase}\n\nDiscover your Zodiac Goddess at zodiacauramirror.com`;
+  const shareText = `The Zodiac Mirror — ${goddess.name} ${goddess.symbol}\n\n“${goddess.powerPhrase}”\n\nthezodiacmirror.com`;
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const handleTikTokShare = () => {
     // TikTok doesn't have direct share API, so we'll copy to clipboard and show instructions
     if (navigator.clipboard) {
       navigator.clipboard.writeText(shareText);
-      alert('Copied to clipboard! Paste into TikTok to share.');
+      alert('Copied to clipboard.');
     }
   };
 

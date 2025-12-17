@@ -6,8 +6,9 @@ import Image from 'next/image';
 import { ZodiacGoddess } from '@/types';
 import { goddessProfiles } from '@/data/goddessProfiles';
 import html2canvas from 'html2canvas';
-import ShareButtons from './ShareButtons';
 import UnlockModal from './UnlockModal';
+import ShareSheet from './ShareSheet';
+import WallpaperCanvas from './WallpaperCanvas';
 
 type ResultSource = 'quiz' | 'birthchart';
 
@@ -24,9 +25,11 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
   const isFromQuiz = resultSource === 'quiz';
   const [showUnlock, setShowUnlock] = useState(false);
   const [email, setEmail] = useState('');
-  const [hasUnlocked, setHasUnlocked] = useState(false);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
-  const shareRef = useRef<HTMLDivElement>(null);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [copiedPhrase, setCopiedPhrase] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const wallpaperRef = useRef<HTMLDivElement>(null);
 
   const handleFeedback = (feedback: string) => {
     // In production, send feedback to your API
@@ -46,6 +49,18 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
     return goddessProfiles.find(p => p.sign === goddess.sign);
   }, [goddess.sign]);
 
+  const handleCopyPowerPhrase = async () => {
+    if (!profile?.powerPhrase) return;
+    try {
+      await navigator.clipboard.writeText(profile.powerPhrase);
+      setCopiedPhrase(true);
+      window.setTimeout(() => setCopiedPhrase(false), 1500);
+    } catch (e) {
+      // Silent failure (no alerts) to keep tone calm
+      console.error('Failed to copy power phrase:', e);
+    }
+  };
+
   // Randomly select an image from the profile's images array (stable selection)
   const selectedImage = useMemo(() => {
     if (!profile || !profile.images || profile.images.length === 0) {
@@ -56,26 +71,39 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
     return profile.images[randomIndex];
   }, [goddess.sign, profile]);
 
+  const fileSafe = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/['’"]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
   const handleDownloadWallpaper = async () => {
-    if (!shareRef.current) return;
-
-    if (!hasUnlocked) {
-      setShowUnlock(true);
-      return;
-    }
-
+    if (!wallpaperRef.current || !profile) return;
+    if (isExporting) return;
     try {
-      const canvas = await html2canvas(shareRef.current, {
-        backgroundColor: '#0a0a12',
-        scale: 2,
+      setIsExporting(true);
+      // Wait for fonts (best-effort) to keep text crisp and stable
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const fonts = (document as any).fonts;
+      if (fonts?.ready) {
+        await fonts.ready;
+      }
+
+      const canvas = await html2canvas(wallpaperRef.current, {
+        backgroundColor: null,
+        scale: 2, // 1080x1920 -> 2160x3840 export
+        useCORS: true,
       });
       const url = canvas.toDataURL('image/png');
       const link = document.createElement('a');
-      link.download = `zodiac-aura-${goddess.sign}.png`;
+      link.download = `the-zodiac-mirror-${fileSafe(profile.title)}.png`;
       link.href = url;
       link.click();
     } catch (error) {
       console.error('Error generating image:', error);
+    } finally {
+      setIsExporting(false);
     }
   };
 
@@ -263,6 +291,52 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
           </motion.div>
         )}
 
+        {/* Primary artifact actions (calm, optional) */}
+        {profile && (
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.25 }}
+            className="w-full max-w-md mb-6"
+          >
+            <div className="bg-purple-900/10 backdrop-blur-md border border-purple-500/20 rounded-3xl p-5">
+              <div className="flex flex-col gap-3">
+                <button
+                  type="button"
+                  onClick={handleDownloadWallpaper}
+                  disabled={isExporting}
+                  className="w-full py-3 px-6 bg-purple-900/25 border border-purple-500/30 rounded-full text-purple-100 text-sm font-medium hover:bg-purple-900/35 transition-colors disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
+                >
+                  {isExporting ? 'Preparing…' : 'Download Wallpaper'}
+                </button>
+
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={handleCopyPowerPhrase}
+                    disabled={isExporting}
+                    className="flex-1 py-3 px-4 bg-purple-900/25 border border-purple-500/30 rounded-full text-purple-100 text-sm font-medium hover:bg-purple-900/35 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
+                  >
+                    Copy Power Phrase
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShareOpen(true)}
+                    disabled={isExporting}
+                    className="flex-1 py-3 px-4 bg-purple-900/25 border border-purple-500/30 rounded-full text-purple-100 text-sm font-medium hover:bg-purple-900/35 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
+                  >
+                    Share
+                  </button>
+                </div>
+
+                <div className="min-h-[16px] text-center text-xs text-purple-300">
+                  {isExporting ? 'Creating a wallpaper image…' : copiedPhrase ? 'Copied' : ''}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Feedback Section (only for quiz results) */}
         {isFromQuiz && !feedbackSubmitted && (
           <motion.div
@@ -282,7 +356,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
                   onClick={() => handleFeedback('matched')}
                   className="w-full py-3 px-6 bg-purple-900/40 border border-purple-500/30 rounded-full text-purple-200 text-sm hover:bg-purple-800/50 transition-all"
                 >
-                  Yes, it matched!
+                  Yes, it matched
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
@@ -359,51 +433,30 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.1 }}
-          className="w-full max-w-sm space-y-4 mb-6"
+          className="w-full max-w-sm space-y-3 mb-6"
         >
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleDownloadWallpaper}
-            className="w-full py-4 px-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-bold text-lg shadow-lg shadow-purple-500/50"
-          >
-            {hasUnlocked ? 'Download Wallpaper' : 'Unlock Wallpaper'}
-          </motion.button>
-
-          <ShareButtons goddess={goddess} shareRef={shareRef} />
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             onClick={onReset}
-            className="w-full py-3 px-8 bg-purple-900/40 border border-purple-500/30 rounded-full text-purple-200 font-semibold"
+            className="w-full py-3 px-8 bg-transparent border border-purple-500/30 rounded-full text-purple-200 font-semibold hover:bg-purple-900/20 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
           >
             Discover Again
           </motion.button>
         </motion.div>
       </div>
 
-      {/* Hidden shareable content for image generation */}
+      {/* Hidden, dedicated wallpaper renderer (not a screenshot of UI) */}
       {profile && (
-        <div ref={shareRef} className="absolute -top-[9999px] left-0 w-full max-w-[450px] aspect-[9/16] bg-mystic-dark p-8 flex flex-col items-center justify-center">
-          <div className={`bg-gradient-to-br ${goddess.gradient} opacity-20 absolute inset-0`} />
-          <div className="relative z-10 text-center w-full">
-            {/* Image for shareable content */}
-            <div className="relative w-full mb-6 rounded-2xl overflow-hidden">
-              <div className="relative aspect-[9/16] w-full bg-purple-950/30">
-                <img
-                  src={selectedImage}
-                  alt={profile.title}
-                  className="w-full h-full rounded-2xl object-contain"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-purple-900/30 opacity-30 rounded-2xl pointer-events-none" />
-              </div>
-            </div>
-            <div className="text-9xl mb-4">{goddess.symbol}</div>
-            <h1 className="text-4xl font-bold mb-3 text-white">{profile.title}</h1>
-            <div className="text-xl text-purple-300 mb-3">{profile.auraGradient}</div>
-            <div className="text-lg text-purple-200 italic">"{profile.powerPhrase}"</div>
-          </div>
+        <div
+          ref={wallpaperRef}
+          className="fixed left-[-10000px] top-0 opacity-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <WallpaperCanvas
+            imageSrc={selectedImage}
+            title={profile.title}
+            line={profile.powerPhrase}
+            element={profile.element}
+          />
         </div>
       )}
 
@@ -412,12 +465,21 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
         <UnlockModal
           onClose={() => setShowUnlock(false)}
           onUnlock={(unlocked) => {
-            setHasUnlocked(unlocked);
             setShowUnlock(false);
           }}
           email={email}
           setEmail={setEmail}
           goddess={goddess}
+        />
+      )}
+
+      {/* Share sheet (UI-only) */}
+      {profile && (
+        <ShareSheet
+          open={shareOpen}
+          onClose={() => setShareOpen(false)}
+          onDownload={handleDownloadWallpaper}
+          caption={`The Zodiac Mirror — ${profile.title}\n\n“${profile.powerPhrase}”\n\nthezodiacmirror.com\n\nDesigned for sharing as a story or wallpaper.`}
         />
       )}
     </div>
