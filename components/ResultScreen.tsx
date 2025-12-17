@@ -110,14 +110,14 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
   return (
     <div className="min-h-screen w-full flex flex-col relative overflow-hidden">
       {/* Background with gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${goddess.gradient} opacity-20`} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(107,70,193,0.3),transparent_70%)]" />
+      <div className={`absolute inset-0 bg-gradient-to-br ${goddess.gradient} opacity-20 pointer-events-none`} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(107,70,193,0.3),transparent_70%)] pointer-events-none" />
 
       {/* Animated particles */}
       {[...Array(15)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-white rounded-full opacity-30"
+          className="absolute w-2 h-2 bg-white rounded-full opacity-30 pointer-events-none"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -412,19 +412,20 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
         >
           <div className="bg-purple-900/20 backdrop-blur-md border border-purple-500/30 rounded-3xl p-6">
             <h2 className="text-xl font-semibold text-purple-200 mb-3 text-center">
-              Want to see yourself as a goddess?
+              Personalised Aura Portraits
             </h2>
-            <p className="text-purple-300 text-sm text-center mb-4">
-              Send us a photo and we'll transform it into your own personalized aura portrait.
+            <p className="text-purple-300 text-sm text-center mb-3">
+              If you’d like a custom portrait inspired by your reflection, you can request a personalised aura image.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleCreateGoddessImage}
-              className="w-full py-3 px-6 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full text-white font-semibold shadow-lg shadow-pink-500/50"
+            <p className="text-purple-300 text-sm text-center mb-5">
+              This is a considered, hand-crafted process — not an instant filter.
+            </p>
+            <a
+              href="mailto:youremail@domain.com?subject=Personalised%20Aura%20Portrait%20Request&body=Hi,%0D%0A%0D%0AI'd%20like%20to%20request%20a%20personalised%20aura%20portrait.%0D%0A%0D%0AName:%0D%0AZodiac%20Sign:%0D%0AAny%20notes:%0D%0A%0D%0AThanks"
+              className="block w-full py-3 px-6 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full text-white font-semibold shadow-lg shadow-pink-500/30 text-center focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
             >
-              Create My Goddess Image
-            </motion.button>
+              Request a Personalised Portrait
+            </a>
           </div>
         </motion.div>
 
