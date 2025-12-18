@@ -1,27 +1,13 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
-import { zodiacGoddesses } from '@/data/zodiacGoddesses';
+import { goddessProfiles } from '@/data/goddessProfiles';
 
 export const metadata: Metadata = {
   title: 'Zodiac Mirror Cards | The Zodiac Mirror',
   description:
-    'Zodiac Mirror Cards are quiet artefacts drawn from the same archetypes as the Mirror. Each card holds a single presence.',
+    'Quiet artifacts drawn from the same archetypes as the Mirror. Each card holds a single presence.',
 };
-
-const zodiacSigns = [
-  'aries',
-  'taurus',
-  'gemini',
-  'cancer',
-  'leo',
-  'virgo',
-  'libra',
-  'scorpio',
-  'sagittarius',
-  'capricorn',
-  'aquarius',
-  'pisces',
-];
 
 export default function CardsPage() {
   return (
@@ -29,9 +15,9 @@ export default function CardsPage() {
       <div className="mx-auto max-w-[450px] space-y-8">
         <h1 className="text-3xl font-semibold tracking-tight">Zodiac Mirror Cards</h1>
 
-        <div className="space-y-5 text-sm leading-relaxed text-purple-100/90">
+        <div className="space-y-4 text-sm leading-relaxed text-purple-100/90">
           <p>
-            Zodiac Mirror Cards are quiet artefacts drawn from the same archetypes as the Mirror.
+            Quiet artifacts drawn from the same archetypes as the Mirror.
           </p>
           <p>
             Each card holds a single presence.
@@ -40,36 +26,50 @@ export default function CardsPage() {
 
         {/* Card Grid */}
         <div className="grid grid-cols-2 gap-4 mt-8">
-          {zodiacSigns.map((sign) => {
-            const goddess = zodiacGoddesses[sign];
-            if (!goddess) return null;
+          {goddessProfiles.map((profile) => {
+            const imagePath = profile.images && profile.images.length > 0 
+              ? profile.images[0] 
+              : `/Signs/${profile.sign.charAt(0).toUpperCase() + profile.sign.slice(1)}.jpg`;
 
             return (
               <div
-                key={sign}
-                className="relative aspect-[2/3] bg-purple-900/20 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-4 flex flex-col items-center justify-center overflow-hidden"
+                key={profile.sign}
+                className="relative aspect-[2/3] bg-mystic-dark border border-purple-500/20 rounded-lg overflow-hidden"
               >
-                {/* Card background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${goddess.gradient} opacity-5 pointer-events-none`} />
-                
-                <div className="relative z-10 text-center space-y-3">
-                  {/* Zodiac Symbol */}
-                  <div className="text-4xl">{goddess.symbol}</div>
-                  
-                  {/* Goddess Name */}
-                  <div className="text-xs font-semibold text-purple-200 uppercase tracking-wide">
-                    {sign.charAt(0).toUpperCase() + sign.slice(1)}
-                  </div>
-                </div>
+                <Image
+                  src={imagePath}
+                  alt={profile.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 200px"
+                />
               </div>
             );
           })}
         </div>
 
-        {/* Coming Soon */}
+        {/* Mirror Cards Section */}
+        <div className="mt-8 pt-8 border-t border-purple-500/30">
+          <h2 className="text-xl font-semibold text-purple-200 mb-4">
+            Mirror Cards
+          </h2>
+          <div className="space-y-4 text-sm leading-relaxed text-purple-100/90 mb-4">
+            <p>
+              Mirror Cards are a reflective edition of Zodiac Mirror Cards.
+            </p>
+            <p>
+              Each card presents an archetype on one side, and a mirror on the other — inviting recognition rather than interpretation.
+            </p>
+          </div>
+          <p className="text-purple-300 text-xs">
+            A reflective edition is in preparation.
+          </p>
+        </div>
+
+        {/* Closing line */}
         <div className="mt-8 pt-6 border-t border-purple-500/30 text-center">
           <p className="text-purple-300 text-sm">
-            Coming soon
+            Digital and physical editions are being prepared.
           </p>
         </div>
       </div>
