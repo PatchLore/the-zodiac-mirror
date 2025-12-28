@@ -583,6 +583,21 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
             Sit With This Reflection
           </motion.button>
         </motion.div>
+
+        {/* Subtle link to explore full collection */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.3 }}
+          className="w-full max-w-md mb-6 text-center"
+        >
+          <Link
+            href="/posters"
+            className="text-purple-400/70 hover:text-purple-300 text-xs transition-colors underline underline-offset-2"
+          >
+            Explore the complete Zodiac Goddess collection
+          </Link>
+        </motion.div>
       </div>
 
       {/* Hidden, dedicated wallpaper renderer (not a screenshot of UI) */}

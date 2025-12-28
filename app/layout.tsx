@@ -60,6 +60,12 @@ export default function RootLayout({
               <Link href="/portrait-terms" className="hover:text-purple-100 transition-colors">
                 Portrait Terms
               </Link>
+              <span className="text-purple-500/40" aria-hidden="true">
+                •
+              </span>
+              <Link href="/posters" className="hover:text-purple-100 transition-colors">
+                Posters
+              </Link>
             </nav>
           </footer>
         </div>
