@@ -1,0 +1,45 @@
+12-MYTHICAL-SIGNS-POSTERS/
+│
+├── README.md                          ← Start here: Overview and collection structure
+├── QUICK-START.md                     ← 5-minute setup guide
+├── FOLDER-STRUCTURE.txt               ← This file: Visual structure reference
+│
+├── COLLECTION-DESCRIPTION.md          ← Marketing copy and collection story
+├── PRODUCT-INFO.md                    ← Technical specs (fill in dimensions/sizes)
+├── POSTER-DESCRIPTIONS.md             ← Individual descriptions for each poster
+├── LICENSE.md                         ← Usage rights (choose license type)
+├── NAMING-CONVENTIONS.md              ← File naming standards
+├── SETUP-INSTRUCTIONS.md              ← Detailed setup steps
+│
+└── posters/                           ← Place renamed PNG files here
+    ├── 01-aries.png                   (copy from: public/Signs/12 Mythical Signs Posters/Aries.png)
+    ├── 02-taurus.png                  (copy from: public/Signs/12 Mythical Signs Posters/Taurus.png)
+    ├── 03-gemini.png                  (copy from: public/Signs/12 Mythical Signs Posters/Gemini.png)
+    ├── 04-cancer.png                  (copy from: public/Signs/12 Mythical Signs Posters/Cancer.png)
+    ├── 05-leo.png                     (copy from: public/Signs/12 Mythical Signs Posters/Leo.png)
+    ├── 06-virgo.png                   ✅ (copy from: public/Signs/12 Mythical Signs Posters/Virgo.png)
+    ├── 07-libra.png                   (copy from: public/Signs/12 Mythical Signs Posters/Libra.png)
+    ├── 08-scorpio.png                 (copy from: public/Signs/12 Mythical Signs Posters/Scorpio.png)
+    ├── 09-sagittarius.png             (copy from: public/Signs/12 Mythical Signs Posters/SagittariusBest.png)
+    ├── 10-capricorn.png               (copy from: public/Signs/12 Mythical Signs Posters/Capricorn.png)
+    ├── 11-aquarius.png                (copy from: public/Signs/12 Mythical Signs Posters/Aquarius.png)
+    └── 12-pisces.png                  (copy from: public/Signs/12 Mythical Signs Posters/Pisces.png)
+
+
+SOURCE FILES LOCATION:
+/public/Signs/12 Mythical Signs Posters/
+
+
+CURRENT STATUS:
+✅ 12 of 12 posters available — Collection Complete!
+✅ Virgo (06-virgo.png) added
+✅ SagittariusBest.png selected (duplicate removed)
+
+
+NEXT ACTIONS:
+1. ✅ Collection complete (Virgo added, duplicate removed)
+2. Copy and rename all files to posters/ folder
+4. Fill in PRODUCT-INFO.md with actual specifications
+5. Choose license type in LICENSE.md
+6. Create ZIP file for distribution
+
