@@ -79,7 +79,7 @@ body {
 .watermark-debug {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
-  font-size: clamp(2rem, 45%, 3rem); /* 40-50% of image width */
+  font-size: clamp(0.875rem, 22%, 1.5rem); /* 20-25% of image width - subtle and refined */
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #FFFFFF; /* Pure white */
