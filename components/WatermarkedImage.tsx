@@ -64,27 +64,39 @@ export default function WatermarkedImage({
       
       img.onload = () => {
         try {
-          // Calculate scaling to fit image in canvas while maintaining aspect ratio
+          // Calculate scaling to cover canvas (fill entire canvas, may crop)
           const imgAspect = img.width / img.height;
           const canvasAspect = width / height;
           
-          let drawWidth = width;
-          let drawHeight = height;
-          let drawX = 0;
-          let drawY = 0;
+          // Always draw to fill entire canvas
+          const drawX = 0;
+          const drawY = 0;
+          const drawWidth = width;
+          const drawHeight = height;
+          
+          let sourceX = 0;
+          let sourceY = 0;
+          let sourceWidth = img.width;
+          let sourceHeight = img.height;
 
           if (imgAspect > canvasAspect) {
-            // Image is wider - fit to width
-            drawHeight = width / imgAspect;
-            drawY = (height - drawHeight) / 2;
+            // Image is wider - scale to fill height, crop width from center
+            const scale = height / img.height;
+            const scaledWidth = img.width * scale;
+            // Crop horizontally to match canvas aspect
+            sourceWidth = img.width * (canvasAspect / imgAspect);
+            sourceX = (img.width - sourceWidth) / 2;
           } else {
-            // Image is taller - fit to height
-            drawWidth = height * imgAspect;
-            drawX = (width - drawWidth) / 2;
+            // Image is taller - scale to fill width, crop height from center
+            const scale = width / img.width;
+            const scaledHeight = img.height * scale;
+            // Crop vertically to match canvas aspect
+            sourceHeight = img.height * (imgAspect / canvasAspect);
+            sourceY = (img.height - sourceHeight) / 2;
           }
 
-          // Draw the image
-          ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+          // Draw the image to fill the entire canvas (cover behavior)
+          ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, drawX, drawY, drawWidth, drawHeight);
 
           // Draw watermark - centered
           ctx.save();
@@ -141,7 +153,7 @@ export default function WatermarkedImage({
         style={{
           width: '100%',
           height: '100%',
-          objectFit: 'contain',
+          objectFit: 'cover',
           display: imageLoaded ? 'block' : 'none',
         }}
         aria-label={alt}
