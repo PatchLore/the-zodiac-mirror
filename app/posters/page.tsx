@@ -72,6 +72,7 @@ export default function PostersPage() {
               <div
                 key={sign}
                 className="relative aspect-[9/16] bg-mystic-dark border border-purple-500/20 rounded-lg overflow-hidden"
+                style={{ position: 'relative' }}
               >
                 <Image
                   src={imagePath}
@@ -79,6 +80,7 @@ export default function PostersPage() {
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 50vw, 200px"
+                  style={{ position: 'absolute', zIndex: 1 }}
                 />
                 <Watermark />
               </div>

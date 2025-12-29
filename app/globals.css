@@ -75,3 +75,19 @@ body {
   /* color: rgba(212, 175, 55, 0.07); */
 }
 
+/* DEBUG MODE: High visibility watermark for testing */
+.watermark-debug {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 45%, 3rem); /* 40-50% of image width */
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #FFFFFF; /* Pure white */
+  opacity: 0.13; /* 13% opacity - clearly visible for debugging */
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  z-index: 10;
+  position: relative;
+}
+
