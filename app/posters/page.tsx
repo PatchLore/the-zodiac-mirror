@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
-import Watermark from '@/components/Watermark';
+import WatermarkedImage from '@/components/WatermarkedImage';
 
 export const metadata: Metadata = {
   title: 'Zodiac Goddess Posters | The Zodiac Mirror',
@@ -72,17 +71,14 @@ export default function PostersPage() {
               <div
                 key={sign}
                 className="relative aspect-[9/16] bg-mystic-dark border border-purple-500/20 rounded-lg overflow-hidden"
-                style={{ position: 'relative' }}
               >
-                <Image
+                <WatermarkedImage
                   src={imagePath}
                   alt={`${name} Zodiac Goddess Poster`}
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 50vw, 200px"
-                  style={{ position: 'absolute', zIndex: 1 }}
                 />
-                <Watermark />
               </div>
             );
           })}
