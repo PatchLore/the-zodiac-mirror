@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 import UnlockModal from './UnlockModal';
 import ShareSheet from './ShareSheet';
 import WallpaperCanvas from './WallpaperCanvas';
+import { saveReflection } from '@/lib/reflectionStorage';
 
 type ResultSource = 'quiz' | 'birthchart';
 
@@ -92,6 +93,18 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
       hostedButtonId: 'DRQT4AJREA3WN',
     }).render('#paypal-container-DRQT4AJREA3WN');
   }, []);
+
+  // Save reflection to localStorage when result is shown
+  useEffect(() => {
+    if (goddess) {
+      saveReflection({
+        goddess,
+        userName,
+        resultSource,
+        birthSign,
+      });
+    }
+  }, [goddess, userName, resultSource, birthSign]);
 
   const handleCreatePortrait = () => {
     portraitSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -392,6 +405,34 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
           </motion.div>
         )}
 
+        {/* Bring This Energy Into Your Space - Prints/Posters Section */}
+        {profile && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4 }}
+            className="w-full max-w-md mb-6"
+          >
+            <div className="bg-purple-900/20 backdrop-blur-md border border-purple-500/30 rounded-3xl p-6">
+              <h2 className="text-xl font-semibold text-purple-200 mb-3 text-center">
+                Bring This Energy Into Your Space
+              </h2>
+              <p className="text-purple-300 text-sm text-center mb-5">
+                Discover prints and posters featuring {profile.title}
+              </p>
+              <Link href="/posters">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold text-base shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70 transition-all"
+                >
+                  View Prints & Posters
+                </motion.button>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+
         {/* Feedback Section (only for quiz results) */}
         {isFromQuiz && !feedbackSubmitted && (
           <motion.div
@@ -597,6 +638,26 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
           >
             Explore the complete Zodiac Goddess collection
           </Link>
+        </motion.div>
+
+        {/* Forget my reflection link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.4 }}
+          className="w-full max-w-md mb-6 text-center"
+        >
+          <button
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                localStorage.removeItem('zodiac-mirror-reflection');
+                onReset();
+              }
+            }}
+            className="text-purple-500/60 hover:text-purple-400 text-xs transition-colors underline underline-offset-2"
+          >
+            Forget my reflection
+          </button>
         </motion.div>
       </div>
 

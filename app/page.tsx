@@ -1,31 +1,48 @@
 'use client';
 
-import { useState } from 'react';
-import StartScreen from '@/components/StartScreen';
+import { useState, useEffect } from 'react';
+import HomePage from '@/components/HomePage';
 import QuizScreen from '@/components/QuizScreen';
 import BirthChartScreen from '@/components/BirthChartScreen';
 import ResultScreen from '@/components/ResultScreen';
 import { ZodiacGoddess } from '@/types';
 import { zodiacGoddesses } from '@/data/zodiacGoddesses';
+import { getSavedReflection, clearReflection, SavedReflection } from '@/lib/reflectionStorage';
 
-type Screen = 'start' | 'quiz' | 'birthchart' | 'result';
-
+type Screen = 'home' | 'quiz' | 'birthchart' | 'result';
 type ResultSource = 'quiz' | 'birthchart';
 
 export default function Home() {
-  const [currentScreen, setCurrentScreen] = useState<Screen>('start');
+  const [currentScreen, setCurrentScreen] = useState<Screen>('home');
   const [selectedGoddess, setSelectedGoddess] = useState<ZodiacGoddess | null>(null);
   const [birthSign, setBirthSign] = useState<string | undefined>(undefined);
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [resultSource, setResultSource] = useState<ResultSource | undefined>(undefined);
-  const [resetKey, setResetKey] = useState(0); // Key to force remount of StartScreen
+  const [resetKey, setResetKey] = useState(0);
+  const [savedReflection, setSavedReflection] = useState<SavedReflection | null>(null);
+
+  // Check for saved reflection on mount
+  useEffect(() => {
+    const saved = getSavedReflection();
+    if (saved) {
+      setSavedReflection(saved);
+      // Optionally auto-load the saved reflection
+      // For now, we'll show it on the homepage
+    }
+  }, []);
 
   const handleStartQuiz = (name?: string) => {
+    // Clear saved reflection when starting fresh
+    clearReflection();
+    setSavedReflection(null);
     setUserName(name);
     setCurrentScreen('quiz');
   };
 
   const handleStartBirthChart = (name?: string) => {
+    // Clear saved reflection when starting fresh
+    clearReflection();
+    setSavedReflection(null);
     setUserName(name);
     setCurrentScreen('birthchart');
   };
@@ -34,57 +51,72 @@ export default function Home() {
     setSelectedGoddess(goddess);
     setResultSource('quiz');
     setCurrentScreen('result');
-    // Birth sign remains undefined if they only took the quiz
   };
 
   const handleBirthChartComplete = (goddess: ZodiacGoddess) => {
     setSelectedGoddess(goddess);
-    setBirthSign(goddess.sign); // Store birth sign when using birth chart
+    setBirthSign(goddess.sign);
     setResultSource('birthchart');
     setCurrentScreen('result');
   };
 
   const handleViewBirthSign = (sign: string) => {
-    // Find the birth sign goddess and display it
     if (sign && zodiacGoddesses[sign]) {
       const birthSignGoddess = zodiacGoddesses[sign];
       setSelectedGoddess(birthSignGoddess);
-      // Stay on result screen, just update the goddess
     }
   };
 
+  const handleRevisitReflection = () => {
+    if (savedReflection) {
+      setSelectedGoddess(savedReflection.goddess);
+      setUserName(savedReflection.userName);
+      setResultSource(savedReflection.resultSource);
+      setBirthSign(savedReflection.birthSign);
+      setCurrentScreen('result');
+    }
+  };
+
+  const handleExploreAnother = () => {
+    clearReflection();
+    setSavedReflection(null);
+    setCurrentScreen('home');
+  };
+
   const handleReset = () => {
-    // Reset all state first
     setSelectedGoddess(null);
     setBirthSign(undefined);
     setUserName(undefined);
     setResultSource(undefined);
-    // Then change screen and force remount
-    setCurrentScreen('start');
-    setResetKey(prev => prev + 1); // Force remount of StartScreen
+    setCurrentScreen('home');
+    setResetKey(prev => prev + 1);
+    // Don't clear saved reflection on reset - let them revisit
   };
 
-  // Safety check: ensure we always have a valid screen to render
+  // Render screen based on current state
   const renderScreen = () => {
-    if (currentScreen === 'start') {
+    if (currentScreen === 'home') {
       return (
-        <StartScreen
+        <HomePage
           key={resetKey}
           onStartQuiz={handleStartQuiz}
           onStartBirthChart={handleStartBirthChart}
+          onRevisitReflection={savedReflection ? handleRevisitReflection : undefined}
+          onExploreAnother={savedReflection ? handleExploreAnother : undefined}
+          savedGoddessName={savedReflection?.userName}
         />
       );
     }
     
     if (currentScreen === 'quiz') {
-      return <QuizScreen onComplete={handleQuizComplete} onBack={() => setCurrentScreen('start')} />;
+      return <QuizScreen onComplete={handleQuizComplete} onBack={() => setCurrentScreen('home')} />;
     }
     
     if (currentScreen === 'birthchart') {
       return (
         <BirthChartScreen
           onComplete={handleBirthChartComplete}
-          onBack={() => setCurrentScreen('start')}
+          onBack={() => setCurrentScreen('home')}
         />
       );
     }
@@ -104,20 +136,26 @@ export default function Home() {
       }
       // Fallback if selectedGoddess is null
       return (
-        <StartScreen
+        <HomePage
           key={resetKey}
           onStartQuiz={handleStartQuiz}
           onStartBirthChart={handleStartBirthChart}
+          onRevisitReflection={savedReflection ? handleRevisitReflection : undefined}
+          onExploreAnother={savedReflection ? handleExploreAnother : undefined}
+          savedGoddessName={savedReflection?.userName}
         />
       );
     }
     
     // Final fallback
     return (
-      <StartScreen
+      <HomePage
         key={resetKey}
         onStartQuiz={handleStartQuiz}
         onStartBirthChart={handleStartBirthChart}
+        onRevisitReflection={savedReflection ? handleRevisitReflection : undefined}
+        onExploreAnother={savedReflection ? handleExploreAnother : undefined}
+        savedGoddessName={savedReflection?.userName}
       />
     );
   };
@@ -128,4 +166,3 @@ export default function Home() {
     </main>
   );
 }
-
