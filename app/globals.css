@@ -59,3 +59,19 @@ body {
           drop-shadow(0 0 20px rgba(107, 70, 193, 0.5));
 }
 
+/* Watermark text for thumbnail images */
+.watermark-text {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 248, 235, 0.07); /* Soft off-white at 7% opacity */
+  opacity: 1; /* Opacity is handled by color alpha */
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  /* Alternative muted gold option - uncomment to use instead */
+  /* color: rgba(212, 175, 55, 0.07); */
+}
+
