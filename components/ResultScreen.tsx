@@ -543,6 +543,10 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
               Created individually and delivered privately by email.
             </p>
             
+            <p className="text-purple-300/80 text-sm text-center mb-4 italic">
+              If this reflection stayed with you, a personalised portrait is available.
+            </p>
+            
             <a
               href="mailto:zodiacaura@mail.com?subject=Personalised Aura Portrait Request&body=Hi,%0D%0A%0D%0AI'd like to request a personalised Zodiac Mirror portrait.%0D%0A%0D%0AReflection / goddess (if known):%0D%0A(If you're not sure, that's okay.)%0D%0A%0D%0AWhich quality should the portrait lean toward?%0D%0ACalm / Power / Mystery / Balance / Not sure%0D%0A%0D%0AWhen you imagine this portrait as a mirror, what should it reflect back to you?%0D%0A(e.g. calm, strength, softness, clarity, becoming)%0D%0A%0D%0AIs there anything you'd prefer to avoid?%0D%0A(e.g. intense expressions, dark tones, mythic elements)%0D%0A%0D%0AAny additional requests or details you'd like me to consider?%0D%0A(Optional — only if it feels important.)%0D%0A%0D%0AI've attached my photo.%0D%0A%0D%0AThank you."
               className="block w-full py-3 px-6 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full text-white font-semibold shadow-lg shadow-pink-500/30 text-center focus:outline-none focus:ring-2 focus:ring-purple-400/50 focus:ring-offset-2 focus:ring-offset-mystic-dark"
