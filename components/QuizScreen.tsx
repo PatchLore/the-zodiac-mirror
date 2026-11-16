@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { quizQuestions, calculateQuizResult } from '@/data/quizQuestions';
 import { zodiacGoddesses } from '@/data/zodiacGoddesses';
 import { ZodiacGoddess } from '@/types';
@@ -13,18 +13,28 @@ interface QuizScreenProps {
 
 export default function QuizScreen({ onComplete, onBack }: QuizScreenProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
+  // Answers are kept by question number, and a tap only counts if it is for the question on screen, once.
+  // The next question appears 300 ms after a tap, and the old question's buttons stay clickable while they
+  // animate out, so without this a fast second tap added an extra answer (and could finish the quiz twice).
+  const currentRef = useRef(0);
+  const answersRef = useRef<number[]>([]);
+  const busy = useRef(false);
 
-  const handleAnswer = (answerIndex: number) => {
-    const newAnswers = [...answers, answerIndex];
-    setAnswers(newAnswers);
+  const handleAnswer = (questionIndex: number, answerIndex: number) => {
+    if (busy.current || questionIndex !== currentRef.current) return;
+    busy.current = true;
 
-    if (currentQuestion < quizQuestions.length - 1) {
+    answersRef.current[questionIndex] = answerIndex;
+    const newAnswers = [...answersRef.current];
+
+    if (questionIndex < quizQuestions.length - 1) {
       setTimeout(() => {
-        setCurrentQuestion(currentQuestion + 1);
+        currentRef.current = questionIndex + 1;
+        setCurrentQuestion(questionIndex + 1);
+        busy.current = false;
       }, 300);
     } else {
-      // Quiz complete
+      // Quiz complete (stays locked so it can only finish once)
       const resultSign = calculateQuizResult(newAnswers);
       const goddess = zodiacGoddesses[resultSign];
       if (goddess) {
@@ -92,7 +102,7 @@ export default function QuizScreen({ onComplete, onBack }: QuizScreenProps) {
                 key={index}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => handleAnswer(index)}
+                onClick={() => handleAnswer(currentQuestion, index)}
                 className="w-full py-4 px-6 bg-purple-900/40 backdrop-blur-sm border border-purple-500/30 rounded-2xl text-left text-white hover:bg-purple-800/50 transition-all hover:border-pink-500/50"
               >
                 {answer.text}

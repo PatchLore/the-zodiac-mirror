@@ -118,8 +118,10 @@ export function calculateQuizResult(answers: number[]): string {
   };
 
   answers.forEach((answerIndex, questionIndex) => {
+    // Ignore anything beyond the last question or an unknown answer, so a stray extra tap cannot crash scoring.
     const question = quizQuestions[questionIndex];
-    const answer = question.answers[answerIndex];
+    const answer = question?.answers[answerIndex];
+    if (!answer) return;
     Object.entries(answer.scores).forEach(([sign, score]) => {
       scores[sign] += score;
     });
