@@ -68,7 +68,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
   // Randomly select an image from the profile's images array (stable selection)
   const selectedImage = useMemo(() => {
     if (!profile || !profile.images || profile.images.length === 0) {
-      return `/Signs/${goddess.sign.charAt(0).toUpperCase() + goddess.sign.slice(1)}.jpg`; // Fallback
+      return `/Signs/art-nouveau/${goddess.sign.charAt(0).toUpperCase() + goddess.sign.slice(1)}.jpg`; // Fallback
     }
     // Select a random image once when component mounts or sign changes
     const randomIndex = Math.floor(Math.random() * profile.images.length);
@@ -220,7 +220,7 @@ export default function ResultScreen({ goddess, birthSign, userName, resultSourc
                   transition={{ duration: 0.8, ease: 'easeOut' }}
                   className="relative w-full mb-6 rounded-2xl overflow-hidden"
                 >
-                  <div className="relative aspect-[9/16] w-full bg-purple-950/30">
+                  <div className="relative aspect-[2/3] w-full bg-purple-950/30">
                     <Image
                       src={selectedImage}
                       alt={profile.title}

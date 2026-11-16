@@ -18,7 +18,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Bold', 'Fearless', 'Passionate', 'Dynamic', 'Leader'],
     powerPhrase: 'I ignite paths no one dares to walk.',
     description: 'She is the first spark — a living flame who charges forward with fearless will. Her aura burns away doubt and awakens action wherever it moves.',
-    images: ['/Signs/Aries.jpg'],
+    images: ['/Signs/art-nouveau/Aries.jpg'],
   },
   {
     sign: 'taurus',
@@ -28,7 +28,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Grounded', 'Sensual', 'Patient', 'Loyal', 'Abundant'],
     powerPhrase: 'I root myself in beauty and grow endlessly.',
     description: 'She embodies sacred stillness and earthly pleasure — a living garden in bloom. Her aura soothes and strengthens all it touches.',
-    images: ['/Signs/Taurus.jpg'],
+    images: ['/Signs/art-nouveau/Taurus.jpg'],
   },
   {
     sign: 'gemini',
@@ -38,7 +38,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Curious', 'Expressive', 'Clever', 'Playful', 'Adaptable'],
     powerPhrase: 'I speak in mirrors and move with meaning.',
     description: 'Dual in spirit, her mind weaves light and language into shape. Her aura shimmers with infinite perspectives and playful truth.',
-    images: ['/Signs/Gemini.jpg'],
+    images: ['/Signs/art-nouveau/Gemini.jpg'],
   },
   {
     sign: 'cancer',
@@ -48,7 +48,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Intuitive', 'Protective', 'Nurturing', 'Dreamy', 'Empathic'],
     powerPhrase: 'I am the tide that remembers everything.',
     description: 'Cloaked in starlight and sea-mist, she moves between emotion and moonlight. Her aura is a sanctuary, soft and strong.',
-    images: ['/Signs/Cancer.jpg'],
+    images: ['/Signs/art-nouveau/Cancer.jpg'],
   },
   {
     sign: 'leo',
@@ -58,7 +58,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Charismatic', 'Proud', 'Warm', 'Creative', 'Magnetic'],
     powerPhrase: 'I blaze with joy, and the world responds.',
     description: 'Crowned in sunlight, she radiates heart-centered fire. Her aura inspires loyalty, love, and luminous expression.',
-    images: ['/Signs/Leo.jpg'],
+    images: ['/Signs/art-nouveau/Leo.jpg'],
   },
   {
     sign: 'virgo',
@@ -68,7 +68,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Precise', 'Gentle', 'Observant', 'Purifying', 'Wise'],
     powerPhrase: 'I bring order to chaos with sacred care.',
     description: 'Her glow is clean and subtle — a crystalline rhythm that heals and refines. She sees meaning in every detail.',
-    images: ['/Signs/Virgo.jpg'],
+    images: ['/Signs/art-nouveau/Virgo.jpg'],
   },
   {
     sign: 'libra',
@@ -78,7 +78,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Graceful', 'Diplomatic', 'Romantic', 'Idealistic', 'Fair'],
     powerPhrase: 'I balance light and shadow with elegance.',
     description: 'She walks between symmetry and soul. Her aura is a living dance of contrast, beauty, and truth.',
-    images: ['/Signs/Libra.jpg'],
+    images: ['/Signs/art-nouveau/Libra.jpg'],
   },
   {
     sign: 'scorpio',
@@ -88,7 +88,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Intense', 'Transformative', 'Mysterious', 'Loyal', 'Empowering'],
     powerPhrase: 'I burn, I break, I rise.',
     description: 'She is the serpent of rebirth, wrapped in passion and power. Her aura is both danger and desire — pure alchemy.',
-    images: ['/Signs/Scorpio.jpg'],
+    images: ['/Signs/art-nouveau/Scorpio.jpg'],
   },
   {
     sign: 'sagittarius',
@@ -98,7 +98,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Free', 'Bold', 'Visionary', 'Adventurous', 'Honest'],
     powerPhrase: 'I aim beyond stars and speak in fire.',
     description: 'She carries the infinite horizon in her eyes. Her aura blazes trails through philosophy, passion, and sky.',
-    images: ['/Signs/Sagittarius.jpg', '/Signs/Sagittarius2.jpg'],
+    images: ['/Signs/art-nouveau/Sagittarius.jpg'],
   },
   {
     sign: 'capricorn',
@@ -108,7 +108,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Disciplined', 'Enduring', 'Noble', 'Wise', 'Composed'],
     powerPhrase: 'I ascend with purpose and patience.',
     description: 'She rises like the mountain itself — carved from time and silence. Her aura hums with legacy and grounded light.',
-    images: ['/Signs/Capricorn.jpg'],
+    images: ['/Signs/art-nouveau/Capricorn.jpg'],
   },
   {
     sign: 'aquarius',
@@ -118,7 +118,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Visionary', 'Independent', 'Eccentric', 'Inventive', 'Cool'],
     powerPhrase: 'I pour light into futures unknown.',
     description: 'She is starlight in motion — the vessel of awakening. Her aura ripples with innovation and unshaken clarity.',
-    images: ['/Signs/Aquarius.jpg'],
+    images: ['/Signs/art-nouveau/Aquarius.jpg'],
   },
   {
     sign: 'pisces',
@@ -128,7 +128,7 @@ export const goddessProfiles: GoddessProfile[] = [
     traits: ['Mystical', 'Compassionate', 'Imaginative', 'Emotional', 'Fluid'],
     powerPhrase: 'I dissolve into dreams and return as light.',
     description: 'Drifting between realms, she speaks in waves and visions. Her aura carries healing and endings reborn.',
-    images: ['/Signs/Pisces.jpg'],
+    images: ['/Signs/art-nouveau/Pisces.jpg'],
   },
 ];
 

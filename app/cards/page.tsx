@@ -29,7 +29,7 @@ export default function CardsPage() {
           {goddessProfiles.map((profile) => {
             const imagePath = profile.images && profile.images.length > 0 
               ? profile.images[0] 
-              : `/Signs/${profile.sign.charAt(0).toUpperCase() + profile.sign.slice(1)}.jpg`;
+              : `/Signs/art-nouveau/${profile.sign.charAt(0).toUpperCase() + profile.sign.slice(1)}.jpg`;
 
             return (
               <div
