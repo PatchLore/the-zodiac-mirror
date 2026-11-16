@@ -19,9 +19,16 @@ export async function GET(request: NextRequest) {
     return new NextResponse('Invalid image path', { status: 400 });
   }
 
+  // Resolve the final path before checking it, so "/Signs/../.." cannot climb out of the Signs folder,
+  // and only serve image files.
+  const signsDir = path.join(process.cwd(), 'public', 'Signs') + path.sep;
+  const publicPath = path.resolve(process.cwd(), 'public', '.' + imagePath);
+  if (!publicPath.startsWith(signsDir) || !/\.(png|jpe?g|webp)$/i.test(publicPath)) {
+    return new NextResponse('Invalid image path', { status: 400 });
+  }
+
   try {
-    const publicPath = path.join(process.cwd(), 'public', imagePath);
-    
+
     // Check if file exists
     if (!fs.existsSync(publicPath)) {
       return new NextResponse('Image not found', { status: 404 });
