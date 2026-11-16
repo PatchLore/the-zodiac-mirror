@@ -181,7 +181,7 @@ export default function HomePage({
               whileTap={{ scale: 0.98 }}
               className="w-full py-4 px-8 bg-purple-900/25 border border-purple-500/40 rounded-full text-purple-100 text-base font-medium hover:bg-purple-900/35 hover:border-purple-500/60 transition-all"
             >
-              Browse the Zodiac Goddess Collection
+              Browse the Zodiac Goddess Collections
             </motion.button>
           </Link>
 
